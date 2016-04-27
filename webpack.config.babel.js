@@ -1,32 +1,36 @@
-import webpack from 'webpack'
-import yargs from 'yargs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import webpack from 'webpack'
 
-const {optimizeMinimize} = yargs.alias('p', 'optimize-minimize').argv
-const nodeEnv            = optimizeMinimize ? 'production' : 'development'
-
-const __PORT__ = 8005
+const __PRODUCTION__ = process.env.NODE_ENV === 'production'
+const __DEV__        = ! __PRODUCTION__
+const __PORT__       = 8005
 
 export default {
-  devtool: optimizeMinimize ? 'source-map' : null,
+  devtool: __PRODUCTION__ ? 'source-map' : null,
 
   entry: './src/index',
 
   output: {
     path: './build',
-    filename: optimizeMinimize ? '[name].min.js' : '[name].js',
+    filename: __PRODUCTION__ ? '[name].min.js' : '[name].js',
     hash: true
   },
 
   module: {
     loaders: [
-      {test: /\.js/, loader: 'babel', exclude: /node_modules/}
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      }
     ]
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {'NODE_ENV': JSON.stringify(nodeEnv)}
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     }),
 
     new HtmlWebpackPlugin({

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "From a standalone React build, until a complex foundation with Redux and/or Router—you're good to go.",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.babel.js"
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.babel.js"
   },
   "keywords": ["react", "react-redux", "react-router", "redux", "router"],
   "author": "Guilherme Oderdenge",
