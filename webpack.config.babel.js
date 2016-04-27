@@ -1,11 +1,12 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import webpack from 'webpack'
+'use strict'
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const __PRODUCTION__ = process.env.NODE_ENV === 'production'
 const __DEV__        = ! __PRODUCTION__
 const __PORT__       = 8005
 
-export default {
+module.exports = {
   devtool: __PRODUCTION__ ? 'source-map' : null,
 
   entry: './src/index',
